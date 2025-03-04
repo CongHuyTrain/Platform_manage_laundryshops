@@ -32,10 +32,13 @@ Ensure system security, data privacy, and role-based access control.
 Generate insights on platform performance (e.g., number of active shops, orders processed). 
 Provide platform-wide notifications (e.g., maintenance updates, feature announcements). 
 
- 
-
 Non-Functional requirement 
-
 User-Friendly Interface: The platform should have an intuitive interface that can be easily navigated by users of all tech-savvy levels. 
-
 Ensures all transactional and user data are consistently accurate, complete, and reliable. 
+
+Member:
+Nguyễn Trung Hậu 072205006677
+Nguyễn Mạnh Hùng 077205001425
+Nguyễn Cao Kỳ Duyên 082305002617
+Trương Yến Vy 064305010511
+Lê Công Huy 089205024327
