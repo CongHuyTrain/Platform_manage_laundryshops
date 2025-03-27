@@ -1,6 +1,7 @@
 package main.chgu.controller;
 
 import jakarta.validation.Valid;
+import main.chgu.dto.response.UserReponse;
 import main.chgu.models.User;
 import main.chgu.dto.response.ApiReponse;
 import main.chgu.dto.request.UserCreationRequest;
@@ -19,8 +20,8 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    ApiReponse<User> createUser(@RequestBody @Valid UserCreationRequest request) {
-        ApiReponse<User> apiReponse = new ApiReponse<>();
+    ApiReponse<UserReponse> createUser(@RequestBody @Valid UserCreationRequest request) {
+        ApiReponse<UserReponse> apiReponse = new ApiReponse<>();
         apiReponse.setResult(userService.createUser(request));
         return apiReponse;
     }
@@ -33,12 +34,12 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    User getUser(@PathVariable String userId) {
+    UserReponse getUser(@PathVariable String userId) {
         return userService.getUser(userId);
     }
 
     @PutMapping("/{userId}")
-    User updateUser(@PathVariable String userId, @RequestBody UserUpdateRequest request) {
+    UserReponse updateUser(@PathVariable String userId, @RequestBody UserUpdateRequest request) {
         return userService.updateUser(userId, request);
     }
 

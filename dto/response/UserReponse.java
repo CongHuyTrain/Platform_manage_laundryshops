@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import main.chgu.models.Role;
+
 import java.util.Set;
 
 @Data
@@ -18,6 +20,6 @@ public class UserReponse {
     private String address;
 
     //@ElementCollection
-    Set<String> roles;
+    private Set<Role> roles;
 
 }

@@ -8,6 +8,7 @@ import com.nimbusds.jwt.SignedJWT;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.NonFinal;
 import lombok.extern.slf4j.Slf4j;
+import main.chgu.enums.Role;
 import main.chgu.repository.UserRepository;
 import main.chgu.models.User;
 import main.chgu.dto.request.AuthenticationRequest;
@@ -99,11 +100,11 @@ public class AuthenticationService {
         }
     }
 
-    private String buildScope(User user) {
+     private String buildScope(User user) {
         StringJoiner stringJoiner = new StringJoiner(" ");
-        if(!CollectionUtils.isEmpty(user.getRoles())) {
-            user.getRoles().forEach(stringJoiner::add);
-        }
+        //if(!CollectionUtils.isEmpty(user.getRoles())) {
+            //user.getRoles().stream().map(Role::name).forEach(stringJoiner::add);
+        //}
         return stringJoiner.toString();
     }
 

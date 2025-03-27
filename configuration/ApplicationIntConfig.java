@@ -23,12 +23,12 @@ public class ApplicationIntConfig {
     ApplicationRunner applicationRunner(UserRepository userRepository){
         return args -> {
             if(userRepository.findByName("admin").isEmpty()){
-                var roles = new HashSet<String>();
-                roles.add(Role.ADMIN.name());
+                var roles = new HashSet<Role>();
+                roles.add(Role.ADMIN);
                 User user = User.builder()
                         .name("admin")
                         .password(passwordEncoder.encode("admin"))
-                        .roles(Role)
+                        //.roles(roles)
                         .build();
                 userRepository.save(user);
             }
