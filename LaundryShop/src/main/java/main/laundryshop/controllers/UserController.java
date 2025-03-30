@@ -7,6 +7,7 @@ import main.laundryshop.dto.request.UserCreationRequest;
 import main.laundryshop.dto.request.UserUpdateRequest;
 import main.laundryshop.dto.response.UserResponse;
 import main.laundryshop.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,7 +15,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    UserService userService;
+    @Autowired
+    private UserService userService;
 
     @PostMapping
     ApiResponse<UserResponse> createUser(@RequestBody @Valid UserCreationRequest request) {
