@@ -18,6 +18,7 @@
     <!--End Topbar-->
     <!--content-->
     <div class="main-content">
+        <!--checkout-->
         <div class="card-border">
             <div class="card-header bg-info ">
                 <h2 id="checkout">Checkout</h2>
@@ -58,51 +59,85 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input" name="payment" id="paypal">
-                        <label class="custom-control-label" for="paypal">Ngân Hàng</label>
+                        <input type="radio" class="custom-control-input" name="payment" id="qrcode">
+                        <label class="custom-control-label" for="qrcode">QRcode</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input" name="payment" id="directcheck">
-                        <label class="custom-control-label" for="directcheck">Trả góp</label>
+                        <input type="radio" class="custom-control-input" name="payment" id="credit">
+                        <label class="custom-control-label" for="credit">The Credit</label>
                     </div>
                 </div>
                 <div class="">
                     <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input" name="payment" id="banktransfer">
-                        <label class="custom-control-label" for="banktransfer">Thanh toán bằng tiên mặt</label>
+                        <input type="radio" class="custom-control-input" name="payment" id="cash">
+                        <label class="custom-control-label" for="cash">Thanh toán bằng tiên mặt</label>
                     </div>
                 </div>
             </div>
             <div class="card-footer">
-                <button class="btn btn-lg btn-block btn-info font-weight-bold my-3 py-3" id="btn-open">Thanh
+                <button class="btn btn-lg btn-block btn-info font-weight-bold my-3 py-3" id="btn_open">Thanh
                     Toan</button>
             </div>
+            <!--End checkout-->
 
         </div>
+        <!--content 2-->
+        <!--content 2-->
         <!--modal-->
 
         <div id="modal-container">
             <div id="modal">
                 <div class="modal-header">
                     <h3>The Credit</h3>
-                    <button id="btn-close" class="bg-info"><i class="fa-solid fa-xmark "></i></button>
+                    <button id="btn_close" class="bg-info"><i class="fa-solid fa-xmark "></i></button>
                 </div>
                 <div class="modal-body">
-                    <form class="">
-                        <label for="text"></label>
+                    <form class="modal-payment">
+                        <label for="text">Ho va Ten chu the</label>
+                        <br>
+                        <input type="text" id="name" placeholder="Nhap ho va ten chu the">  
                     </form>
+                    <form class="modal-payment">
+                        <label for="text">So the</label><br>
+                        <input type="text" id="number" placeholder="sothe">
+                    </form>
+                    <form class="">
+                        <label for="text">CCV</label><br>
+                        <input type="text" id="CCV" placeholder="CCV">
+                    </form>
+                    <form class="modal-payment">
+                        <label for="text">Ngay Het Han</label><br>
+                        <input type="month" id="datecredit" placeholder="Ngay Het Han">
+                    </form>
+                    <img src="/img/atm.png" class="img-atm">
+                    <div class="card-footer-payment">
+                        <button class="btn btn-lg btn-block btn-info font-weight-bold my-3 py-3" id="btn-payment">Thanh
+                            Toan</button>
+                    </div>
                 </div>
             </div>
         </div>
         <!--end modal-->
+        <!--modal 2-->
+        <!--endmodal2-->
     </div>
-
     </div>
     <!--End content-->
     <!--footer-->
     <!--end footer-->
+    <script>
+        const btn_open = document.getElementById('btn_open');
+        const btn_close = document.getElementById('btn_close');
+        const modal_container = document.getElementById('modal-container')
+        btn_open.addEventListener('click', () => {
+            modal_container.classList.add('show');
+        });
+        btn_close.addEventListener('click', () => {
+            modal_container.classList.remove('show');
+        });
+    </script>
 </body>
 
 </html>
