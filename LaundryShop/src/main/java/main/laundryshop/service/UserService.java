@@ -2,6 +2,7 @@ package main.laundryshop.service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 import main.laundryshop.Exceptions.AppException;
 import main.laundryshop.Exceptions.ErrorCode;
@@ -58,13 +59,13 @@ public class UserService {
         var context = SecurityContextHolder.getContext();
         String name = context.getAuthentication().getName();
 
-        User user = userRepository.findByName(name).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+        User user = userRepository.findByUsername(name).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
 
         return userMapper.toUserResponse(user);
     }
 
     @PostAuthorize("returnObject.name == authentication.name")
-    public UserResponse updateUser(String userId, UserUpdateRequest request) {
+    public UserResponse updateUser(Long userId, UserUpdateRequest request) {
         User user = userRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
 
         userMapper.updateUser(user, request);
@@ -77,7 +78,7 @@ public class UserService {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    public void deleteUser(String userId) {
+    public void deleteUser(Long userId) {
         userRepository.deleteById(userId);
     }
 
@@ -87,8 +88,11 @@ public class UserService {
     }
 
     @PostAuthorize("returnObject.name == authentication.name")
-    public UserResponse getUser(String id) {
+    public UserResponse getUser(Long id) {
         return userMapper.toUserResponse(
                 userRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED)));
+    }
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 }
