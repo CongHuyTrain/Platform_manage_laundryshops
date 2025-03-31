@@ -21,5 +21,5 @@ public class Role {
     private String description;
 
     @ManyToMany
-    Set<Permission> permissions;
+    private Set<Permission> permissions;
 }

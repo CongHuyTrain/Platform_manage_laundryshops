@@ -7,14 +7,9 @@ import main.laundryshop.repositories.RoleRepository;
 import main.laundryshop.repositories.UserRepository;
 import main.laundryshop.models.User;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import java.util.HashSet;
-
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
@@ -34,12 +29,12 @@ public class ApplicationInitConfig {
     @NonFinal
     static final String ADMIN_PASSWORD = "admin";
 
-    @Bean
+    //@Bean
 //    @ConditionalOnProperty(
 //            prefix = "spring",
 //            value = "datasource.driverClassName",
 //            havingValue = "com.mysql.cj.jdbc.Driver")
-    ApplicationRunner applicationRunner(UserRepository userRepository, RoleRepository roleRepository) {
+    public ApplicationRunner applicationRunner(UserRepository userRepository, RoleRepository roleRepository) {
         log.info("Initializing application.....");
         return args -> {
             if (userRepository.findByName(ADMIN_USER_NAME).isEmpty()) {

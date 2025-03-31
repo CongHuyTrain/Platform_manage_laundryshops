@@ -33,8 +33,7 @@ import java.util.StringJoiner;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @NonFinal
     @Value("${jwt.signerKey}")
@@ -73,7 +72,7 @@ public class AuthenticationService {
                 .build();
     }
 
-    private String generateToken(User user) {
+    public String generateToken(User user) {
         JWSHeader header = new JWSHeader(JWSAlgorithm.HS512);
 
         JWTClaimsSet jwtClaimsSet = new JWTClaimsSet.Builder()
@@ -99,7 +98,7 @@ public class AuthenticationService {
         }
     }
 
-    private String buildScope(User user) {
+    public String buildScope(User user) {
         StringJoiner stringJoiner = new StringJoiner(" ");
         //if(!CollectionUtils.isEmpty(user.getRoles())) {
         //user.getRoles().stream().map(Role::name).forEach(stringJoiner::add);

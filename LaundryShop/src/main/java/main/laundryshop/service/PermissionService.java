@@ -17,11 +17,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class PermissionService {
-    PermissionRepository permissionRepository;
-    PermissionMapper permissionMapper;
+    private final PermissionRepository permissionRepository;
+    private final PermissionMapper permissionMapper;
 
     public PermissionResponse create(PermissionRequest request) {
         Permission permission = permissionMapper.toPermission(request);

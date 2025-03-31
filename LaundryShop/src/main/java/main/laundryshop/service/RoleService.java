@@ -4,22 +4,19 @@ import lombok.RequiredArgsConstructor;
 import main.laundryshop.dto.request.RoleRequest;
 import main.laundryshop.dto.response.RoleResponse;
 import main.laundryshop.mapper.RoleMapper;
-import main.laundryshop.models.Role;
 import main.laundryshop.repositories.PermissionRepository;
 import main.laundryshop.repositories.RoleRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class RoleService {
     private final RoleRepository roleRepository;
-    RoleRepository repository;
-    PermissionRepository permissionRepository;
-    RoleMapper roleMapper;
+    private final PermissionRepository permissionRepository;
+    private final RoleMapper roleMapper;
 
     public RoleResponse create(RoleRequest request) {
         var role = roleMapper.toRole(request);

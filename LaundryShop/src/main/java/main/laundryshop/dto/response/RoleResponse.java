@@ -3,7 +3,6 @@ package main.laundryshop.dto.response;
 import java.util.Set;
 
 import lombok.*;
-import lombok.experimental.FieldDefaults;
 
 @Data
 @NoArgsConstructor
@@ -12,5 +11,5 @@ import lombok.experimental.FieldDefaults;
 public class RoleResponse {
     private String name;
     private String description;
-    Set<PermissionResponse> permissions;
+    private Set<PermissionResponse> permissions;
 }

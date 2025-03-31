@@ -1,5 +1,6 @@
 package main.laundryshop.controllers;
 
+import lombok.RequiredArgsConstructor;
 import main.laundryshop.dto.request.ApiResponse;
 import main.laundryshop.dto.request.PermissionRequest;
 import main.laundryshop.dto.request.RoleRequest;
@@ -13,29 +14,29 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
 @RestController
 @RequestMapping("/roles")
+@RequiredArgsConstructor
 public class RoleController {
     @Autowired
     private RoleService roleService;
 
     @PostMapping
-    ApiResponse<RoleResponse> create(@RequestBody RoleRequest request){
+    public ApiResponse<RoleResponse> create(@RequestBody RoleRequest request){
         return ApiResponse.<RoleResponse>builder()
                 .result(roleService.create(request))
                 .build();
     }
 
     @GetMapping
-    ApiResponse<List<RoleResponse>> getAll(){
+    public ApiResponse<List<RoleResponse>> getAll(){
         return ApiResponse.<List<RoleResponse>>builder()
                 .result(roleService.getAll())
                 .build();
     }
 
     @DeleteMapping("/{role}")
-    ApiResponse<Void> delete(@PathVariable String role){
+    public ApiResponse<Void> delete(@PathVariable String role){
         roleService.delete(role);
         return ApiResponse.<Void>builder().build();
     }
