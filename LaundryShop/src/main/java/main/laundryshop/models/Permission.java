@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Permission {
     @Id
-    private Long id;
+    //private Long id;
 
     private String name;
     private String description;

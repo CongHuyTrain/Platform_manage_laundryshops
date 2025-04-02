@@ -6,7 +6,6 @@ import main.laundryshop.dto.request.PermissionRequest;
 import main.laundryshop.dto.response.PermissionResponse;
 import main.laundryshop.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

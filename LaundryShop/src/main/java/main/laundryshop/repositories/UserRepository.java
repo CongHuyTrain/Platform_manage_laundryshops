@@ -9,19 +9,20 @@ import main.laundryshop.models.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
     Optional<User> findByName(String name);
-    default boolean existsByNameame(String name) {
-        return false;
-    }
-    default User save(User user) {
-        return null;
-    }
-
-    default List<User> findAll() {
-        return null;
-    }
-    default Optional<User> findById(Long id) {
-        return Optional.empty();
-    }
+    boolean existsByName(String name);
+    //{
+//        return false;
+//    }
+//    default User save(User user) {
+//        return null;
+//    }
+//
+//    default List<User> findAll() {
+//        return null;
+//    }
+//    default Optional<User> findById(Long id) {
+//        return Optional.empty();
+//    }
 
 }
 

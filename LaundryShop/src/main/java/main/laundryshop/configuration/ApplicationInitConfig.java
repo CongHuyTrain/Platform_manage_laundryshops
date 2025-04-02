@@ -7,6 +7,7 @@ import main.laundryshop.repositories.RoleRepository;
 import main.laundryshop.repositories.UserRepository;
 import main.laundryshop.models.User;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,16 +31,16 @@ public class ApplicationInitConfig {
     @NonFinal
     static final String ADMIN_PASSWORD = "admin";
 
-    //@Bean
-//    @ConditionalOnProperty(
-//            prefix = "spring",
-//            value = "datasource.driverClassName",
-//            havingValue = "com.mysql.cj.jdbc.Driver")
     @Bean
+    @ConditionalOnProperty(
+            prefix = "spring",
+            value = "datasource.driverClassName",
+            havingValue = "com.mysql.cj.jdbc.Driver")
     public ApplicationRunner applicationRunner(UserRepository userRepository, RoleRepository roleRepository) {
         log.info("Initializing application.....");
         return args -> {
             if (userRepository.findByName(ADMIN_USER_NAME).isEmpty()) {
+                log.info("No user found with name {}", ADMIN_USER_NAME);
                 roleRepository.save(Role.builder()
                         .name(PredefinedRole.USER_ROLE)
                         .description("User role")
@@ -61,8 +62,9 @@ public class ApplicationInitConfig {
 
                 userRepository.save(user);
                 log.warn("admin user has been created with default password: admin, please change it");
+            }else {
+                log.info("Application initialization completed .....");
             }
-            log.info("Application initialization completed .....");
         };
     }
 }
