@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+    <!--Topbar-->
+    <div class="card-banner">
+        <img src="/img/banner.png" alt="banner">
+    </div>
+    <!--End Topbar-->
+    <!--content-->
+    <div class="main-content">
+        <!--checkout-->
+        <div class="content">
+            <div class="card-border">
+                <div class="card-header ">
+                    <h2 id="checkout">BILL</h2>
+                    <hr color="black">
+                </div>
+                <div class="card-body">
+                    <div class="head-service">
+                        <h6>Dich vu</h6>
+                        <h6>SL</h6>
+                        <h6>Don Gia</h6>
+                        <h6>Tong</h6>
+                    </div>
+                    <hr color=black>
+                    <div class="justify-content-between">
+                        <p>Giac nhanh</p>
+                        <p>3KG</p>
+                        <p>50.000d</p>
+                        <p>150.000</p>
+                    </div>
+                    <hr color="black">
+                    <div class="justify-content-between">
+                        <h6>Tong</h6>
+                        <h6>150.000d</h6>
+                    </div>
+                    <div class="justify-content-between">
+                        <h6>VAT</h6>
+                        <h6>5%</h6>
+                    </div>
+                    <div class="justify-content-between">
+                        <h6>Voucher</h6>
+                        <h7 class="">-50.000</h7>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <hr color="black">
+                    <div class="justify-content-between">
+                        <h5>Tong Tien</h5>
+                        <h5>107.500</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-border">
+                <div class="card-header ">
+                    <h5 id="checkout">Hinh Thuc Thanh Toan</h5>
+                    <hr color="black">
+                </div>
+                <div class="card-body">
+                    <div class="form-choose">
+                        <button class="choose" id="btn-open-qr">QRCode</button>
+                    </div>
+                    <div class="form-choose">
+                        <button class="choose" id="btn_open_credit">The Credit</button>
+                    </div>
+                    <div class="form-choose">
+                        <button class="choose" id="btn-open-pay">Tiền Mặt</button>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <hr color="black">
+                    <button class="choose" id="btn-order">Xuat Hoa
+                        Don</button>
+                </div>
+            </div>
+        </div>
+        <!--End checkout-->
+
+
+    </div>
+    <!--modal Credit-->
+
+    <div id="modal-container-credit">
+        <div id="modal">
+            <div class="modal-header">
+                <h3>The Credit</h3>
+                <button id="btn_close_credit" class="bg-info"><i class="fa-solid fa-xmark "></i></button>
+            </div>
+            <div class="modal-body">
+                <form class="modal-payment">
+                    <label for="text">Ho va Ten chu the</label>
+                    <br>
+                    <input type="text" id="name" placeholder="Nhap ho va ten chu the">
+                </form>
+                <form class="modal-payment">
+                    <label for="text">So the</label><br>
+                    <input type="text" id="number" placeholder="sothe">
+                </form>
+                <form class="">
+                    <label for="text">CCV</label><br>
+                    <input type="text" id="CCV" placeholder="CCV">
+                </form>
+                <form class="modal-payment">
+                    <label for="text">Ngay Het Han</label><br>
+                    <input type="month" id="datecredit" placeholder="Ngay Het Han">
+                </form>
+                <img src="/img/atm.png" class="img-atm">
+                <div class="card-footer-payment">
+                    <button class="btn btn-lg btn-block btn-info font-weight-bold my-3 py-3" id="btn-payment">Thanh
+                        Toan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end modal Credit-->
+    <!--modal QR-->
+    <div id="modal-container-qr">
+        <div id="modal">
+            <div class="modal-header">
+                <h3>QRcode</h3>
+                <button id="btn-close-qr" class="bg-info"><i class="fa-solid fa-xmark "></i></button>
+            </div>
+            <div class="modal-body">
+               <img src="/img/qrcode.png" class="img-qr">
+            </div>
+            <div class="card-footer">
+                <hr color="black">
+                <button class="XacNhan" id="btn-order-accept">Xac Nhan Thanh Toan</button>
+            </div>
+        </div>
+    </div>
+    <!--endmodal QR-->
+    </div>
+    </div>
+    <!--End content-->
+    <!--footer-->
+    <div class="footer-bg">
+        <h6>This is footer</h6>
+    </div>
+    <!--end footer-->
+    <!--JVS-->
+    <!--action modal credit-->
+    <script> 
+        const btn_open_credit = document.getElementById('btn_open_credit');
+        const btn_close_credit = document.getElementById('btn_close_credit');
+        const modal_container_credit = document.getElementById('modal-container-credit')
+        btn_open_credit.addEventListener('click', () => {
+            modal_container_credit.classList.add('show');
+        });
+        btn_close_credit.addEventListener('click', () => {
+            modal_container_credit.classList.remove('show');
+        });
+    </script>
+    <!--end action modal credit-->
+    <!--action modal QR-->
+    <script>
+        const btn_open_qr = document.getElementById('btn-open-qr');
+        const btn_close_qr = document.getElementById('btn-close-qr');
+        const modal_container_qr = document.getElementById('modal-container-qr');
+        btn_open_qr.addEventListener('click',()=>{
+            modal_container_qr.classList.add('show');
+        })
+        btn_close_qr.addEventListener('click',()=>{
+            modal_container_qr.classList.remove('show');
+        })
+    </script>
+    <!--End Action modal QR-->
+    <!--End JVS-->
+</body>
+
+</html>

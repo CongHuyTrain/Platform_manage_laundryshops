@@ -7,6 +7,7 @@ import main.laundryshop.repositories.RoleRepository;
 import main.laundryshop.repositories.UserRepository;
 import main.laundryshop.models.User;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.HashSet;
@@ -34,6 +35,7 @@ public class ApplicationInitConfig {
 //            prefix = "spring",
 //            value = "datasource.driverClassName",
 //            havingValue = "com.mysql.cj.jdbc.Driver")
+    @Bean
     public ApplicationRunner applicationRunner(UserRepository userRepository, RoleRepository roleRepository) {
         log.info("Initializing application.....");
         return args -> {

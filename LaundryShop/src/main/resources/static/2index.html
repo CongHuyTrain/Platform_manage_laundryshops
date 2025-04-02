@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanExpress - Dịch vụ giặt đồ TP.HCM</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4e73df;
+            --secondary-color: #1cc88a;
+            --dark-color: #2e59d9;
+            --light-color: #f8f9fc;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fc;
+        }
+        
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .slide-in-right {
+            animation: slideInRight 0.8s ease-in-out;
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        /* Navbar Styling */
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero:before {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -150px;
+            right: -150px;
+        }
+        
+        .hero:after {
+            content: "";
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            bottom: -100px;
+            left: -100px;
+        }
+        
+        .hero h1 {
+            font-weight: 700;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        /* Service Card */
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-card img {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        .service-card .card-body {
+            padding: 20px;
+        }
+        
+        .service-card .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1;
+        }
+        
+        .service-card .service-price {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+        
+        /* Store Card */
+        .store-card {
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            position: relative;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .store-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .store-card img {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        .store-card .store-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 20px;
+        }
+        
+        .store-card .store-rating {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 20px;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        
+        /* Features Section */
+        .features-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--light-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-item:hover .features-icon {
+            background: var(--primary-color);
+            color: white;
+            transform: rotateY(180deg);
+        }
+        
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 50px 0;
+        }
+        
+        footer a {
+            color: #ecf0f1;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: var(--secondary-color);
+        }
+        
+        footer .social-icons a {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        footer .social-icons a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+        
+        /* Modal */
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .modal-header {
+            border-bottom: none;
+            padding: 20px 30px;
+        }
+        
+        .modal-body {
+            padding: 20px 30px;
+        }
+        
+        .modal-footer {
+            border-top: none;
+            padding: 20px 30px;
+        }
+        
+        /* Login/Register Forms */
+        .form-control {
+            border-radius: 10px;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 1px solid #e1e5eb;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 10px;
+            padding: 12px 20px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--dark-color);
+            transform: translateY(-2px);
+        }
+        
+        /* Search Box */
+        .search-box {
+            border-radius: 30px;
+            padding: 15px 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: none;
+        }
+        
+        /* Filter Sidebar */
+        .filter-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            border-radius: 10px 10px 0 0;
+            font-weight: 600;
+        }
+        
+        .filter-body {
+            background: white;
+            padding: 20px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Order Tracking */
+        .order-timeline-item {
+            padding-left: 30px;
+            position: relative;
+            padding-bottom: 30px;
+        }
+        
+        .order-timeline-item:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            z-index: 1;
+        }
+        
+        .order-timeline-item:after {
+            content: "";
+            position: absolute;
+            left: 7px;
+            top: 15px;
+            bottom: 0;
+            width: 1px;
+            background: #e1e5eb;
+        }
+        
+        .order-timeline-item:last-child:after {
+            display: none;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .service-card img {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-tshirt me-2"></i>CleanExpress
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="fas fa-home me-1"></i>Trang chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services"><i class="fas fa-list-alt me-1"></i>Dịch vụ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#stores"><i class="fas fa-store me-1"></i>Cửa hàng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about"><i class="fas fa-info-circle me-1"></i>Giới thiệu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact"><i class="fas fa-phone me-1"></i>Liên hệ</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        <i class="fas fa-sign-in-alt me-1"></i>Đăng nhập
+                    </button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">
+                        <i class="fas fa-user-plus me-1"></i>Đăng ký
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 fade-in">
+                    <h1>Dịch vụ giặt ủi chuyên nghiệp tại TP.HCM</h1>
+                    <p>Tìm kiếm, đặt lịch và theo dõi dịch vụ giặt đồ nhanh chóng và tiện lợi. Chất lượng đảm bảo và giao hàng tận nơi!</p>
+                    <div class="d-flex">
+                        <a href="#services" class="btn btn-light btn-lg me-3"><i class="fas fa-list me-2"></i>Xem dịch vụ</a>
+                        <a href="#stores" class="btn btn-outline-light btn-lg"><i class="fas fa-store me-2"></i>Tìm cửa hàng</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 slide-in-right d-none d-lg-block">
+                    <div class="p-4 text-center">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjUwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9Im5vbmUiLz4KICA8Y2lyY2xlIGN4PSIyNTAiIGN5PSIyNTAiIHI9IjE1MCIgZmlsbD0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjIpIi8+CiAgPHBhdGggZD0iTTMwMCAxNTBIMjAwQzE4OS41IDE1MCAxODAgMTU5LjUgMTgwIDE3MFYzMzBDMTgwIDM0MC41IDE4OS41IDM1MCAyMDAgMzUwSDMwMEMzMTAuNSAzNTAgMzIwIDM0MC41IDMyMCAzMzBWMTcwQzMyMCAxNTkuNSAzMTAuNSAxNTAgMzAwIDE1MFoiIGZpbGw9IndoaXRlIi8+CiAgPHBhdGggZD0iTTI4MCAxODBIMjIwQzIxNS41IDE4MCAyMTIgMTgzLjUgMjEyIDE4OFYyMDJDMjEyIDIwNi41IDIxNS41IDIxMCAyMjAgMjEwSDI4MEMyODQuNSAyMTAgMjg4IDIwNi41IDI4OCAyMDJWMTg4QzI4OCAxODMuNSAyODQuNSAxODAgMjgwIDE4MFoiIGZpbGw9IiM0ZTczZGYiLz4KICA8cGF0aCBkPSJNMjgwIDIyMEgyMjBDMjE1LjUgMjIwIDIxMiAyMjMuNSAyMTIgMjI4VjI0MkMyMTIgMjQ2LjUgMjE1LjUgMjUwIDIyMCAyNTBIMjgwQzI4NC41IDI1MCAyODggMjQ2LjUgMjg4IDI0MlYyMjhDMjg4IDIyMy41IDI4NC41IDIyMCAyODAgMjIwWiIgZmlsbD0iIzFlYzhiNSIvPgogIDxwYXRoIGQ9Ik0yODAgMjYwSDIyMEMyMTUuNSAyNjAgMjEyIDI2My41IDIxMiAyNjhWMjgyQzIxMiAyODYuNSAyMTUuNSAyOTAgMjIwIDI5MEgyODBDMjg0LjUgMjkwIDI4OCAyODYuNSAyODggMjgyVjI2OEMyODggMjYzLjUgMjg0LjUgMjYwIDI4MCAyNjBaIiBmaWxsPSIjNGU3M2RmIi8+CiAgPHBhdGggZD0iTTI2MCAzMzBIMjQwTDI0MCAyOTBIMjYwVjMzMFoiIGZpbGw9IiM0ZTczZGYiLz4KICA8Y2lyY2xlIGN4PSIyNTAiIGN5PSIxMzUiIHI9IjI1IiBmaWxsPSIjMWVjOGI1Ii8+CiAgPHBhdGggZD0iTTI1MCAyMDBIMjUwQzI2OSAyMDAgMjg0IDE4NSAyODQgMTY2VjE1MEgyMTZWMTY2QzIxNiAxODUgMjMxIDIwMCAyNTAgMjAwWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="Laundry Service Icon" width="400" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search & Filter Section -->
+    <section class="py-5 bg-white">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="input-group" data-aos="fade-up">
+                        <input type="text" class="form-control search-box" placeholder="Tìm kiếm dịch vụ giặt là..." aria-label="Search">
+                        <button class="btn btn-primary px-4" type="button"><i class="fas fa-search me-2"></i>Tìm kiếm</button>
+                    </div>
+                    <div class="d-flex justify-content-center mt-3" data-aos="fade-up" data-aos-delay="100">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-outline-primary"><i class="fas fa-tshirt me-1"></i>Giặt hấp</button>
+                            <button type="button" class="btn btn-outline-primary"><i class="fas fa-wind me-1"></i>Giặt khô</button>
+                            <button type="button" class="btn btn-outline-primary"><i class="fas fa-socks me-1"></i>Giặt đồ thể thao</button>
+                            <button type="button" class="btn btn-outline-primary"><i class="fas fa-couch me-1"></i>Giặt sofa</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="fw-bold">Dịch vụ mới cập nhật</h2>
+                <p class="text-muted">Khám phá các dịch vụ giặt là mới nhất từ các cửa hàng trên địa bàn TP.HCM</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-3 col-sm-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-card">
+                        <span class="badge bg-danger">Hot</span>
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDQwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNmMGYzZjkiLz4KICA8cmVjdCB4PSIxMDAiIHk9IjUwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjEwMCIgcng9IjEwIiBmaWxsPSIjZTdlYmY1Ii8+CiAgPGNpcmNsZSBjeD0iMTUwIiBjeT0iODAiIHI9IjIwIiBmaWxsPSIjNGU3M2RmIi8+CiAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iODAiIHI9IjIwIiBmaWxsPSIjNGU3M2RmIi8+CiAgPGNpcmNsZSBjeD0iMjUwIiBjeT0iODAiIHI9IjIwIiBmaWxsPSIjNGU3M2RmIi8+CiAgPHBhdGggZD0iTTE1MCA4MGwyMCAxMGgyMGwyMC0xMGwtMjAgMTBoLTIwbC0yMC0xMHoiIGZpbGw9IndoaXRlIi8+CiAgPHBhdGggZD0iTTEzMCAxMjBIMjcwIiBzdHJva2U9IiM0ZTczZGYiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTEzMCAxMzBIMjcwIiBzdHJva2U9IiM0ZTczZGYiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPg==" alt="Dịch vụ giặt hấp quần áo" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Giặt hấp quần áo</h5>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="service-price">60.000đ/kg</span>
+                                <span class="badge bg-primary">Giặt hấp</span>
+                            </div>
+                            <p class="card-text text-muted">Giặt sạch, ủi phẳng, giao hàng tận nơi trong 24h.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted"><i class="fas fa-store me-1"></i>Laundry Express</small>
+                                <button class="btn btn-sm btn-outline-primary">Đặt ngay</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 col-sm-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDQwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNmMGYzZjkiLz4KICA8cmVjdCB4PSI4MCIgeT0iNTAiIHdpZHRoPSIyNDAiIGhlaWdodD0iMTAwIiByeD0iMTAiIGZpbGw9IiNlN2ViZjUiLz4KICA8Y2lyY2xlIGN4PSIxNTAiIGN5PSIxMDAiIHI9IjUwIiBmaWxsPSIjNGU3M2RmIiBmaWxsLW9wYWNpdHk9IjAuMyIvPgogIDxjaXJjbGUgY3g9IjE1MCIgY3k9IjEwMCIgcj0iNDAiIGZpbGw9IiM0ZTczZGYiIGZpbGwtb3BhY2l0eT0iMC42Ii8+CiAgPGNpcmNsZSBjeD0iMTUwIiBjeT0iMTAwIiByPSIzMCIgZmlsbD0iIzRlNzNkZiIvPgogIDxjaXJjbGUgY3g9IjE1MCIgY3k9IjEwMCIgcj0iMTUiIGZpbGw9IndoaXRlIi8+CiAgPHBhdGggZD0iTTI1MCA3NUgyMDBWMTI1SDI1MEgyNzBWNzVIMjUwWiIgZmlsbD0iIzFlYzhiNSIgZmlsbC1vcGFjaXR5PSIwLjYiLz4KICA8cGF0aCBkPSJNMjUwIDgwSDIxMFYxMjBIMjUwSDI2MFY4MEgyNTBaIiBmaWxsPSIjMWVjOGI1Ii8+CiAgPHBhdGggZD0iTTIyMCA5MEgyNTAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTIyMCAxMDBIMjUwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0yMjAgMTEwSDI1MCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+" alt="Giặt khô cao cấp" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Giặt khô cao cấp</h5>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="service-price">100.000đ/bộ</span>
+                                <span class="badge bg-info">Giặt khô</span>
+                            </div>
+                            <p class="card-text text-muted">Chuyên giặt đồ cao cấp, vest, áo dài, đầm dạ hội.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted"><i class="fas fa-store me-1"></i>Clean Pro</small>
+                                <button class="btn btn-sm btn-outline-primary">Đặt ngay</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 col-sm-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card">
+                        <span class="badge bg-success">Mới</span>
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDQwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNmMGYzZjkiLz4KICA8cGF0aCBkPSJNMjQwIDUwSDEzMEMxMjQuNSA1MCAxMjAgNTQuNSAxMjAgNjBWMTQwQzEyMCAxNDUuNSAxMjQuNSAxNTAgMTMwIDE1MEgyNDBDMjQ1LjUgMTUwIDI1MCAxNDUuNSAyNTAgMTQwVjYwQzI1MCA1NC41IDI0NS41IDUwIDI0MCA1MFoiIGZpbGw9IiNlN2ViZjUiLz4KICA8cGF0aCBkPSJNMjMwIDcwSDI3MEMyNzUuNSA3MCAyODAgNzQuNSAyODAgODBWMTYwQzI4MCAxNjUuNSAyNzUuNSAxNzAgMjcwIDE3MEgyMzBDMjI0LjUgMTcwIDIyMCAxNjUuNSAyMjAgMTYwVjgwQzIyMCA3NC41IDIyNC41IDcwIDIzMCA3MFoiIGZpbGw9IiNlN2ViZjUiLz4KICA8cGF0aCBkPSJNMTQwIDcwSDE1MEMxNTUuNSA3MCAxNjAgNzQuNSAxNjAgODBWMTEwQzE2MCAxMTUuNSAxNTUuNSAxMjAgMTUwIDEyMEgxNDBDMTM0LjUgMTIwIDEzMCAxMTUuNSAxMzAgMTEwVjgwQzEzMCA3NC41IDEzNC41IDcwIDE0MCA3MFoiIGZpbGw9IiM0ZTczZGYiLz4KICA8cGF0aCBkPSJNMTgwIDcwSDE5MEMxOTUuNSA3MCAyMDAgNzQuNSAyMDAgODBWMTEwQzIwMCAxMTUuNSAxOTUuNSAxMjAgMTkwIDEyMEgxODBDMTc0LjUgMTIwIDE3MCAxMTUuNSAxNzAgMTEwVjgwQzE3MCA3NC41IDE3NC41IDcwIDE4MCA3MFoiIGZpbGw9IiM0ZTczZGYiLz4KICA8cGF0aCBkPSJNMjIwIDgwSDI0MEMyNDUuNSA4MCAyNTAgODQuNSAyNTAgOTBWMTUwQzI1MCAxNTUuNSAyNDUuNSAxNjAgMjQwIDE2MEgyMjBDMjE0LjUgMTYwIDIxMCAxNTUuNSAyMTAgMTUwVjkwQzIxMCA4NC41IDIxNC41IDgwIDIyMCA4MFoiIGZpbGw9IiMxZWM4YjUiLz4KICA8cGF0aCBkPSJNMjYwIDgwSDI4MEMyODUuNSA4MCAyOTAgODQuNSAyOTAgOTBWMTUwQzI5MCAxNTUuNSAyODUuNSAxNjAgMjgwIDE2MEgyNjBDMjU0LjUgMTYwIDI1MCAxNTUuNSAyNTAgMTUwVjkwQzI1MCA4NC41IDI1NC41IDgwIDI2MCA4MFoiIGZpbGw9IiMxZWM4YjUiLz4KICA8Y2lyY2xlIGN4PSIxNDUiIGN5PSI5NSIgcj0iMTAiIGZpbGw9IndoaXRlIi8+CiAgPGNpcmNsZSBjeD0iMTg1IiBjeT0iOTUiIHI9IjEwIiBmaWxsPSJ3aGl0ZSIvPgogIDxjaXJjbGUgY3g9IjIzMCIgY3k9IjEyMCIgcj0iMTUiIGZpbGw9IndoaXRlIi8+CiAgPGNpcmNsZSBjeD0iMjcwIiBjeT0iMTIwIiByPSIxNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="Giặt ghế sofa" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Giặt ghế sofa</h5>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="service-price">350.000đ/ghế</span>
+                                <span class="badge bg-warning text-dark">Đồ nội thất</span>
+                            </div>
+                            <p class="card-text text-muted">Làm sạch sâu, khử mùi, diệt khuẩn tận gốc.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted"><i class="fas fa-store me-1"></i>Home Clean</small>
+                                <button class="btn btn-sm btn-outline-primary">Đặt ngay</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 col-sm-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-card">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDQwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNmMGYzZjkiLz4KICA8cmVjdCB4PSIxMTAiIHk9IjQwIiB3aWR0aD0iMTgwIiBoZWlnaHQ9IjEyMCIgcng9IjEwIiBmaWxsPSIjZTdlYmY1Ii8+CiAgPHBhdGggZD0iTTExMCAxMTBMMTMwIDgwSDE1MEwxNzAgMTEwSDE5MEwyMTAgODBIMjMwTDI1MCAxMTBIMjcwTDI5MCA4MEgzMTBWMTYwSDExMFYxMTBaIiBmaWxsPSIjMWVjOGI1IiBmaWxsLW9wYWNpdHk9IjAuMiIvPgogIDxwYXRoIGQ9Ik0xNTAgODBMMTcwIDExMEgxMzBMMTUwIDgwWiIgZmlsbD0iIzRlNzNkZiIvPgogIDxwYXRoIGQ9Ik0yMTAgODBMMjMwIDgwTDI1MCAxMTBIMTkwTDIxMCA4MFoiIGZpbGw9IiM0ZTczZGYiLz4KICA8cGF0aCBkPSJNMjkwIDgwTDMxMCA4MEwzMTAgMTEwSDI3MEwyOTAgODBaIiBmaWxsPSIjNGU3M2RmIi8+CiAgPHBhdGggZD0iTTExMCAxMTBIMzEwIiBzdHJva2U9IiM0ZTczZGYiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxwYXRoIGQ9Ik0xMjAgMTIwSDMwMCIgc3Ryb2tlPSIjMWVjOGI1IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjQgMiIvPgogIDxwYXRoIGQ9Ik0xMjAgMTMwSDMwMCIgc3Ryb2tlPSIjMWVjOGI1IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjQgMiIvPgogIDxwYXRoIGQ9Ik0xMjAgMTQwSDMwMCIgc3Ryb2tlPSIjMWVjOGI1IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjQgMiIvPgo8L3N2Zz4=" alt="Giặt đồ thể thao" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Giặt đồ thể thao</h5>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="service-price">75.000đ/kg</span>
+                                <span class="badge bg-secondary">Đồ thể thao</span>
+                            </div>
+                            <p class="card-text text-muted">Khử mùi mồ hôi, làm sạch vết bẩn cứng đầu.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted"><i class="fas fa-store me-1"></i>Sport Clean</small>
+                                <button class="btn btn-sm btn-outline-primary">Đặt ngay</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-primary px-4">Xem thêm dịch vụ <i class="fas fa-angle-right ms-2"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stores Section -->
+    <section id="stores" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="fw-bold">Cửa hàng nổi bật</h2>
+                <p class="text-muted">Các cửa hàng giặt là uy tín tại TP.HCM</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="store-card">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDQwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiM0ZTczZGYiLz4KICA8cGF0aCBkPSJNMCAwaDQwMHYyMDBIMHoiIGZpbGw9IiM0ZTczZGYiLz4KICA8cGF0aCBkPSJNMTAwIDYwSDMwMHY4MEgxMDB6IiBmaWxsPSIjZmZmIi8+CiAgPHBhdGggZD0iTTI2NSA5MGMwIDExLjA0Ni04Ljk1NCAyMC0yMCAyMC00LjUyMyAwLTguNjktMS41MDctMTItNC4wMjEtMy4zMSAyLjUxNC03LjQ3NyA0LjAyMS0xMiA0LjAyMS00LjUyMiAwLTguNjktMS41MDctMTItNC4wMjEtMy4zMSAyLjUxNC03LjQ3NyA0LjAyMS0xMiA0LjAyMS0xMS4wNDYgMC0yMC04Ljk1NC0yMC0yMHM4Ljk1NC0yMCAyMC0yMGM0LjUyMyAwIDguNjkgMS41MDcgMTIgNC4wMjEgMy4zMS0yLjUxNCA3LjQ3OC00LjAyMSAxMi00LjAyMSA0LjUyMyAwIDguNjkgMS41MDcgMTIgNC4wMjEgMy4zMS0yLjUxNCA3LjQ3Ny00LjAyMSAxMi00LjAyMSAxMS4wNDYgMCAyMCA4Ljk1NCAyMCAyMHoiIGZpbGw9IiM0ZTczZGYiLz4KICA8cGF0aCBkPSJNMTQwIDc1YzAtMi43NjEgMi4yMzktNSA1LTVzNSAyLjIzOSA1IDUtMi4yMzkgNS01IDUtNS0yLjIzOS01LTV6IiBmaWxsPSIjMWVjOGI1Ii8+CiAgPHBhdGggZD0iTTE0NSA5MGMtNS41MjMgMC0xMC00LjQ3Ny0xMC0xMGg1YzAgMi43NjEgMi4yMzkgNSA1IDVzNS0yLjIzOSA1LTVoNWMwIDUuNTIzLTQuNDc3IDEwLTEwIDEweiIgZmlsbD0iIzFlYzhiNSIvPgogIDxwYXRoIGQ9Ik0xNDcuNSAxMTBsLTctMTBoMTMuNWwtNi41IDEweiIgZmlsbD0iIzFlYzhiNSIvPgo8L3N2Zz4=" alt="Laundry Express" class="img-fluid">
+                        <span class="store-rating"><i class="fas fa-star me-1"></i>4.8</span>
+                        <div class="store-overlay">
+                            <h5>Laundry Express</h5>
+                            <p><i class="fas fa-map-marker-alt me-2"></i>Quận 1, TP.HCM</p>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="text-muted mb-1"><i class="fas fa-phone me-2"></i>028 1234 5678</p>
+                                <div class="d-flex">
+                                    <span class="badge bg-success me-1">Mở cửa</span>
+                                    <span class="small text-muted">07:00 - 21:00</span>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-primary">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="store-card">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDQwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiMxZWM4YjUiLz4KICA8cGF0aCBkPSJNMCAwaDQwMHYyMDBIMHoiIGZpbGw9IiMxZWM4YjUiLz4KICA8cGF0aCBkPSJNMTAwIDYwSDMwMHY4MEgxMDB6IiBmaWxsPSIjZmZmIi8+CiAgPHBhdGggZD0iTTIwMCA3MGMxNi41NjkgMCAzMCAxMy40MzEgMzAgMzBzLTEzLjQzMSAzMC0zMCAzMC0zMC0xMy40MzEtMzAtMzAgMTMuNDMxLTMwIDMwLTMweiIgZmlsbD0iIzFlYzhiNSIvPgogIDxwYXRoIGQ9Ik0xOTAgOTJsMTAgOCAxMC04di0yMmgtMjB2MjJ6IiBmaWxsPSIjZmZmIi8+CiAgPHBhdGggZD0iTTE5MCA3N2gyME0xOTAgODJoMjBNMTkwIDg3aDIwIiBzdHJva2U9IiMxZWM4YjUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPg==" alt="Clean Pro" class="img-fluid">
+                        <span class="store-rating"><i class="fas fa-star me-1"></i>4.7</span>
+                        <div class="store-overlay">
+                            <h5>Clean Pro</h5>
+                            <p><i class="fas fa-map-marker-alt me-2"></i>Quận 3, TP.HCM</p>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="text-muted mb-1"><i class="fas fa-phone me-2"></i>028 2345 6789</p>
+                                <div class="d-flex">
+                                    <span class="badge bg-success me-1">Mở cửa</span>
+                                    <span class="small text-muted">08:00 - 20:00</span>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-primary">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="store-card">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDQwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiMyMjRhYmUiLz4KICA8cGF0aCBkPSJNMCAwaDQwMHYyMDBIMHoiIGZpbGw9IiMyMjRhYmUiLz4KICA8cGF0aCBkPSJNMTAwIDYwSDMwMHY4MEgxMDB6IiBmaWxsPSIjZmZmIi8+CiAgPHBhdGggZD0iTTE1MCA3MGgxMDBNMTUwIDg1aDEwME0xNTAgMTAwaDEwME0xNTAgMTE1aDYwIiBzdHJva2U9IiM0ZTczZGYiIHN0cm9rZS13aWR0aD0iMTAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0xMjUgNzBMMTI1IDEzMCIgc3Ryb2tlPSIjNGU3M2RmIiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8Y2lyY2xlIGN4PSIxMjUiIGN5PSI4NSIgcj0iNSIgZmlsbD0id2hpdGUiLz4KICA8Y2lyY2xlIGN4PSIxMjUiIGN5PSIxMTUiIHI9IjUiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPg==" alt="Home Clean" class="img-fluid">
+                        <span class="store-rating"><i class="fas fa-star me-1"></i>4.5</span>
+                        <div class="store-overlay">
+                            <h5>Home Clean</h5>
+                            <p><i class="fas fa-map-marker-alt me-2"></i>Quận 7, TP.HCM</p>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="text-muted mb-1"><i class="fas fa-phone me-2"></i>028 3456 7890</p>
+                                <div class="d-flex">
+                                    <span class="badge bg-success me-1">Mở cửa</span>
+                                    <span class="small text-muted">07:30 - 21:30</span>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-primary">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-primary px-4">Xem thêm cửa hàng <i class="fas fa-angle-right ms-2"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="fw-bold">Tại sao chọn dịch vụ của chúng tôi?</h2>
+                <p class="text-muted">Nền tảng đặt dịch vụ giặt là tiện lợi và tin cậy nhất tại TP.HCM</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-3 col-sm-6 text-center mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-item">
+                        <div class="features-icon mx-auto">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h5>Tiết kiệm thời gian</h5>
+                        <p class="text-muted">Đặt lịch nhanh chóng, giao nhận tận nơi, không cần ra khỏi nhà.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 col-sm-6 text-center mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-item">
+                        <div class="features-icon mx-auto">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h5>Chất lượng hàng đầu</h5>
+                        <p class="text-muted">Đối tác là các cửa hàng uy tín, công nghệ giặt là hiện đại.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 col-sm-6 text-center mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-item">
+                        <div class="features-icon mx-auto">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <h5>Giá cả hợp lý</h5>
+                        <p class="text-muted">Nhiều ưu đãi, khuyến mãi và giá cả cạnh tranh từ các cửa hàng.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 col-sm-6 text-center mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-item">
+                        <div class="features-icon mx-auto">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h5>An toàn, bảo mật</h5>
+                        <p class="text-muted">Thanh toán an toàn, bảo đảm đồ đạc không thất lạc hay hư hỏng.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Steps Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="fw-bold">Quy trình đặt giặt là</h2>
+                <p class="text-muted">Chỉ 4 bước đơn giản để sử dụng dịch vụ</p>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6 text-center mb-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 70px; height: 70px;">
+                                <i class="fas fa-search fa-2x"></i>
+                            </div>
+                            <h5>Tìm kiếm</h5>
+                            <p class="text-muted">Tìm cửa hàng và dịch vụ phù hợp với nhu cầu của bạn</p>
+                        </div>
+                        
+                        <div class="col-md-3 col-sm-6 text-center mb-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 70px; height: 70px;">
+                                <i class="fas fa-shopping-basket fa-2x"></i>
+                            </div>
+                            <h5>Đặt hàng</h5>
+                            <p class="text-muted">Chọn dịch vụ, thời gian và địa điểm lấy/giao đồ</p>
+                        </div>
+                        
+                        <div class="col-md-3 col-sm-6 text-center mb-4" data-aos="fade-up" data-aos-delay="300">
+                            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 70px; height: 70px;">
+                                <i class="fas fa-truck fa-2x"></i>
+                            </div>
+                            <h5>Giao nhận</h5>
+                            <p class="text-muted">Nhân viên đến tận nơi lấy và giao đồ theo lịch hẹn</p>
+                        </div>
+                        
+                        <div class="col-md-3 col-sm-6 text-center mb-4" data-aos="fade-up" data-aos-delay="400">
+                            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 70px; height: 70px;">
+                                <i class="fas fa-star fa-2x"></i>
+                            </div>
+                            <h5>Đánh giá</h5>
+                            <p class="text-muted">Chia sẻ trải nghiệm của bạn và nhận ưu đãi cho lần sau</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call To Action -->
+    <section class="py-5" style="background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 text-white" data-aos="fade-up">
+                    <h2 class="fw-bold">Bạn cần giặt đồ ngay hôm nay?</h2>
+                    <p class="mb-0">Đăng ký tài khoản ngay để nhận ưu đãi 30% cho lần đặt hàng đầu tiên!</p>
+                </div>
+                <div class="col-lg-4 text-lg-end mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="100">
+                    <button class="btn btn-light btn-lg" data-bs-toggle="modal" data-bs-target="#registerModal">
+                        <i class="fas fa-user-plus me-2"></i>Đăng ký ngay
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- About Section -->
+<section id="about" class="py-5 bg-white">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="fw-bold">Giới thiệu về CleanExpress</h2>
+            <p class="text-muted">Nền tảng kết nối dịch vụ giặt là hàng đầu tại TP.HCM</p>
+        </div>
+        
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-up">
+                <h3>Câu chuyện của chúng tôi</h3>
+                <p>CleanExpress được thành lập vào năm 2022 với sứ mệnh đơn giản hóa việc giặt là cho người dân TP.HCM. Chúng tôi nhận thấy nhu cầu về dịch vụ giặt là chất lượng cao nhưng vẫn thuận tiện và tiết kiệm thời gian.</p>
+                <p>Nền tảng của chúng tôi kết nối khách hàng với các cửa hàng giặt là uy tín trong khu vực, giúp bạn dễ dàng tìm kiếm, so sánh và đặt dịch vụ giặt là phù hợp nhất với nhu cầu của mình.</p>
+                <h3 class="mt-4">Sứ mệnh</h3>
+                <p>Mang đến trải nghiệm giặt là tiện lợi, chất lượng và tiết kiệm cho mọi gia đình. Chúng tôi cam kết không ngừng cải tiến dịch vụ và mở rộng mạng lưới đối tác để phục vụ khách hàng tốt hơn mỗi ngày.</p>
+            </div>
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <div class="col-6 mb-4">
+                                <div class="text-center">
+                                    <div class="display-4 text-primary mb-2">50+</div>
+                                    <p class="text-muted mb-0">Cửa hàng đối tác</p>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-4">
+                                <div class="text-center">
+                                    <div class="display-4 text-primary mb-2">10K+</div>
+                                    <p class="text-muted mb-0">Khách hàng</p>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-center">
+                                    <div class="display-4 text-primary mb-2">100K+</div>
+                                    <p class="text-muted mb-0">Đơn hàng</p>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-center">
+                                    <div class="display-4 text-primary mb-2">4.8</div>
+                                    <p class="text-muted mb-0">Đánh giá trung bình</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold mb-3">Đội ngũ của chúng tôi</h5>
+                            <p>Chúng tôi là đội ngũ chuyên gia công nghệ và dịch vụ khách hàng, luôn tâm huyết với sứ mệnh mang đến dịch vụ giặt là tốt nhất cho người dân TP.HCM.</p>
+                            <a href="#" class="btn btn-outline-primary">Tìm hiểu thêm về chúng tôi</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Contact Section -->
+<section id="contact" class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="fw-bold">Liên hệ với chúng tôi</h2>
+            <p class="text-muted">Chúng tôi luôn sẵn sàng hỗ trợ bạn 24/7</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-5 mb-4 mb-lg-0" data-aos="fade-up">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-3">Thông tin liên hệ</h5>
+                        <p class="mb-4">Nếu bạn có bất kỳ câu hỏi hoặc yêu cầu nào, đừng ngần ngại liên hệ với chúng tôi qua các kênh sau:</p>
+                        
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                <i class="fas fa-map-marker-alt text-white"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Địa chỉ</h6>
+                                <p class="mb-0 text-muted">123 Nguyễn Huệ, Quận 1, TP.HCM</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                <i class="fas fa-phone text-white"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Hotline</h6>
+                                <p class="mb-0 text-muted">1900 1234 56</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                <i class="fas fa-envelope text-white"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Email</h6>
+                                <p class="mb-0 text-muted">info@cleanexpress.vn</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex align-items-center">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                <i class="fas fa-clock text-white"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Giờ làm việc</h6>
+                                <p class="mb-0 text-muted">8:00 - 20:00, T2 - CN</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <h5 class="fw-bold mb-3">Kết nối với chúng tôi</h5>
+                            <div class="d-flex">
+                                <a href="#" class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 40px; height: 40px;">
+                                    <i class="fab fa-facebook-f text-white"></i>
+                                </a>
+                                <a href="#" class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 40px; height: 40px;">
+                                    <i class="fab fa-instagram text-white"></i>
+                                </a>
+                                <a href="#" class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 40px; height: 40px;">
+                                    <i class="fab fa-twitter text-white"></i>
+                                </a>
+                                <a href="#" class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                    <i class="fab fa-youtube text-white"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-3">Gửi tin nhắn cho chúng tôi</h5>
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="contactName" class="form-label">Họ và tên</label>
+                                    <input type="text" class="form-control" id="contactName" placeholder="Nhập họ và tên">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="contactEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="contactEmail" placeholder="Nhập email">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contactPhone" class="form-label">Số điện thoại</label>
+                                <input type="tel" class="form-control" id="contactPhone" placeholder="Nhập số điện thoại">
+                            </div>
+                            <div class="mb-3">
+                                <label for="contactSubject" class="form-label">Chủ đề</label>
+                                <select class="form-select" id="contactSubject">
+                                    <option selected>Chọn chủ đề</option>
+                                    <option value="1">Thắc mắc về dịch vụ</option>
+                                    <option value="2">Báo cáo vấn đề</option>
+                                    <option value="3">Góp ý cải thiện</option>
+                                    <option value="4">Hợp tác kinh doanh</option>
+                                    <option value="5">Khác</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contactMessage" class="form-label">Nội dung tin nhắn</label>
+                                <textarea class="form-control" id="contactMessage" rows="5" placeholder="Nhập nội dung tin nhắn"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Gửi tin nhắn</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="card border-0 shadow-sm mt-4">
+                    <div class="card-body p-0">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.3942876380576!2d106.70162707469335!3d10.77667438931068!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f4670702e31%3A0xa5777fb3a5bb9972!2zMTIzIE5ndXnhu4VuIEh14buHLCBC4bq_biBOZ2jDqSwgUXXhuq1uIDEsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1710685401418!5m2!1svi!2s" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="text-uppercase fw-bold mb-4"><i class="fas fa-tshirt me-2"></i>CleanExpress</h5>
+                    <p>Nền tảng đặt dịch vụ giặt là trực tuyến hàng đầu tại TP.HCM. Kết nối khách hàng với các cửa hàng giặt là uy tín.</p>
+                    <div class="social-icons mt-3">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h6 class="text-uppercase fw-bold mb-4">Dịch vụ</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">Giặt hấp</a></li>
+                        <li class="mb-2"><a href="#">Giặt khô</a></li>
+                        <li class="mb-2"><a href="#">Giặt đồ thể thao</a></li>
+                        <li class="mb-2"><a href="#">Giặt đồ da</a></li>
+                        <li><a href="#">Giặt thảm & Sofa</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h6 class="text-uppercase fw-bold mb-4">Liên kết</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">Trang chủ</a></li>
+                        <li class="mb-2"><a href="#">Giới thiệu</a></li>
+                        <li class="mb-2"><a href="#">Cửa hàng</a></li>
+                        <li class="mb-2"><a href="#">Tài khoản</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 col-md-4">
+                    <h6 class="text-uppercase fw-bold mb-4">Liên hệ</h6>
+                    <p class="mb-2"><i class="fas fa-home me-3"></i> 123 Nguyễn Huệ, Quận 1, TP.HCM</p>
+                    <p class="mb-2"><i class="fas fa-envelope me-3"></i> info@cleanexpress.vn</p>
+                    <p class="mb-2"><i class="fas fa-phone me-3"></i> 1900 1234 56</p>
+                    <p><i class="fas fa-clock me-3"></i> 8:00 - 20:00, T2 - CN</p>
+                </div>
+            </div>
+            
+            <hr class="my-4" style="background-color: rgba(255,255,255,0.2);">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small mb-0">© 2025 CleanExpress. Tất cả quyền được bảo lưu.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                    <a href="#" class="text-white me-3 small">Điều khoản sử dụng</a>
+                    <a href="#" class="text-white me-3 small">Chính sách bảo mật</a>
+                    <a href="#" class="text-white small">Hỗ trợ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Đăng nhập</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="loginEmail" placeholder="Nhập email của bạn">
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Mật khẩu</label>
+                            <input type="password" class="form-control" id="loginPassword" placeholder="Nhập mật khẩu">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Ghi nhớ đăng nhập</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <a href="#" class="text-decoration-none">Quên mật khẩu?</a>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center mt-4">
+                        <hr class="flex-grow-1">
+                        <span class="mx-3 text-muted">hoặc</span>
+                        <hr class="flex-grow-1">
+                    </div>
+                    <div class="d-grid gap-2 mt-3">
+                        <button class="btn btn-outline-primary"><i class="fab fa-facebook-f me-2"></i>Đăng nhập với Facebook</button>
+                        <button class="btn btn-outline-danger"><i class="fab fa-google me-2"></i>Đăng nhập với Google</button>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <p class="mb-0">Chưa có tài khoản? <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Đăng ký ngay</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel">Đăng ký tài khoản</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName" class="form-label">Họ</label>
+                                <input type="text" class="form-control" id="firstName" placeholder="Nhập họ">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName" class="form-label">Tên</label>
+                                <input type="text" class="form-control" id="lastName" placeholder="Nhập tên">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="registerEmail" placeholder="Nhập email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Số điện thoại</label>
+                            <input type="tel" class="form-control" id="phone" placeholder="Nhập số điện thoại">
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerPassword" class="form-label">Mật khẩu</label>
+                            <input type="password" class="form-control" id="registerPassword" placeholder="Tạo mật khẩu">
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Xác nhận mật khẩu</label>
+                            <input type="password" class="form-control" id="confirmPassword" placeholder="Nhập lại mật khẩu">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="agreeTerms">
+                            <label class="form-check-label" for="agreeTerms">Tôi đồng ý với <a href="#">điều khoản</a> và <a href="#">chính sách bảo mật</a></label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Đăng ký</button>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <p class="mb-0">Đã có tài khoản? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Đăng nhập</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Tracking Modal -->
+    <div class="modal fade" id="trackingModal" tabindex="-1" aria-labelledby="trackingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="trackingModalLabel">Theo dõi đơn hàng #12345</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-between mb-4">
+                        <div>
+                            <h6 class="mb-1">Dịch vụ: Giặt hấp quần áo</h6>
+                            <p class="text-muted mb-0">Cửa hàng: Laundry Express</p>
+                        </div>
+                        <div class="text-end">
+                            <span class="badge bg-success p-2">Đang giao hàng</span>
+                        </div>
+                    </div>
+                    
+                    <div class="order-tracking">
+                        <div class="order-timeline-item">
+                            <h6>Đơn hàng đã được tiếp nhận</h6>
+                            <p class="text-muted mb-0">29/03/2025, 09:15</p>
+                        </div>
+                        <div class="order-timeline-item">
+                            <h6>Đã lấy đồ thành công</h6>
+                            <p class="text-muted mb-0">29/03/2025, 10:30</p>
+                        </div>
+                        <div class="order-timeline-item">
+                            <h6>Đang xử lý tại cửa hàng</h6>
+                            <p class="text-muted mb-0">29/03/2025, 13:45</p>
+                        </div>
+                        <div class="order-timeline-item">
+                            <h6>Đang giao hàng</h6>
+                            <p class="text-muted mb-0">29/03/2025, 16:20</p>
+                        </div>
+                        <div class="order-timeline-item">
+                            <h6>Giao hàng thành công</h6>
+                            <p class="text-muted mb-0">Dự kiến: 29/03/2025, 17:30</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <h6>Thông tin giao hàng:</h6>
+                        <p class="mb-1"><i class="fas fa-map-marker-alt me-2"></i>123 Nguyễn Văn Cừ, Quận 5, TP.HCM</p>
+                        <p class="mb-1"><i class="fas fa-user me-2"></i>Nguyễn Văn A</p>
+                        <p><i class="fas fa-phone me-2"></i>0901 234 567</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary"><i class="fas fa-phone-alt me-2"></i>Liên hệ cửa hàng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+        
+        // Tracking Modal Demo
+        document.addEventListener('DOMContentLoaded', function() {
+    // Add click event to all "Đặt ngay" buttons for demo
+    const orderButtons = document.querySelectorAll('.service-card .btn-outline-primary');
+    orderButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            if (button.textContent.trim() === 'Đặt ngay') {
+                e.preventDefault();
+                // Check if user is logged in (this is just a demo)
+                const isLoggedIn = false;
+                
+                if (!isLoggedIn) {
+                    // Show login modal if not logged in
+                    const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                    loginModal.show();
+                } else {
+                    // Process order logic would go here
+                    alert('Đặt hàng thành công!');
+                }
+            }
+        });
+    });
+            
+            // Demo for tracking button
+            const trackBtn = document.querySelector('.call-to-action .btn-primary');
+    if (trackBtn) {
+        trackBtn.addEventListener('click', function() {
+            const trackingModal = new bootstrap.Modal(document.getElementById('trackingModal'));
+            trackingModal.show();
+        });
+    }
+        });
+    </script>
+</body>
+</html>

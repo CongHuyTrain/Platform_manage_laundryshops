@@ -1,0 +1,125 @@
+.card-header{
+    width: 600px;
+    text-align: center;
+    border: 1px solid black;
+    
+    
+}
+.card-body{
+
+}
+.card-footer {
+    border: 1px dashed black;
+}
+.card-border{
+    border: 2px solid black;
+    width: 603px;
+    
+    top: 10px;
+}
+.justify-content-between{
+    display: flex;
+    justify-content: space-between !important;
+}
+.card-footer-btn{
+    text-align: center;
+    border: 1px solid black;
+}
+.head-service{
+    display: flex;
+    justify-content: space-between;
+    
+
+    
+}
+.tongtien{
+    border: 2px dashed black;
+}
+#btn{
+    
+}
+#checkout{
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+.main-content{
+    margin: 10px;
+}
+.custom-control-label{
+    margin: 10px;
+}
+button#btn_open{
+    background: rgb(67, 145, 145);
+    color: white;
+    border: none;
+    padding : 5px 15px;
+    cursor: pointer;
+    box-shadow: 0px 2px 4px rgba(0,0,0,.5);
+}
+#modal-container{
+    background: rgb(0,0,0,.5);
+    width: 100%;
+    height :  100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+#modal-container.show{
+    opacity: 1;
+    pointer-events: all;
+}
+#modal{
+    background: white;
+    max-width: 500px;
+    height: 500px;
+    position: relative;
+    left: 50%;
+    top: 20%;
+    transform: translateX(-50%);
+}
+#modal .modal-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px;
+    border-bottom: 1px solid #dedede;
+   
+
+}
+button#btn_close{
+    outline: none;
+    border: none;
+    color: white; 
+    font-size: 19px;
+    cursor: pointer;
+
+}
+#modal .modol-body{
+    padding: 5px 20px;
+}
+#name{
+    width: 100%;
+    border: 1px solid rgba(34, 30, 30, 0.2)
+}
+#number{
+    border: 1px solid rgba(34, 30, 30, 0.2)
+}
+#CCV{
+    border: 1px solid rgba(34, 30, 30, 0.2)
+}
+#datecredit{
+    border: 1px solid rgba(34, 30, 30, 0.2)
+}
+.img-atm{
+    width: 150px;
+    position: relative;
+    left : 250px;
+    bottom: 150px;
+}
+.card-footer-payment{
+    position: relative;
+    bottom : 100px;
+
+}
