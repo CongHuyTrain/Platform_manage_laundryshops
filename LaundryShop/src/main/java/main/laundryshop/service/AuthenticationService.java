@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.StringJoiner;
@@ -75,13 +76,15 @@ public class AuthenticationService {
     public String generateToken(User user) {
         JWSHeader header = new JWSHeader(JWSAlgorithm.HS512);
 
+        // Sử dụng ZonedDateTime để tính thời gian hết hạn (1 tháng)
+        ZonedDateTime expirationDateTime = ZonedDateTime.now().plus(1, ChronoUnit.MONTHS);
+        Instant expirationInstant = expirationDateTime.toInstant();
+
         JWTClaimsSet jwtClaimsSet = new JWTClaimsSet.Builder()
                 .subject(user.getName())
                 .issuer("dewteria.com")
                 .issueTime(new Date())
-                .expirationTime(new java.util.Date(
-                        Instant.now().plus(1, ChronoUnit.HOURS).toEpochMilli()
-                ))
+                .expirationTime(new java.util.Date(expirationInstant.toEpochMilli()))
                 .claim("scope", buildScope(user))
                 .build();
 

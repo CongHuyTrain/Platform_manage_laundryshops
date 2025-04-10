@@ -228,29 +228,52 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-6 mb-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <span>Doanh thu theo tháng</span>
-                        </div>
-                        <div class="card-body">
-                            <div class="chart-container" id="revenueChart"></div>
-                        </div>
+            <!--sua -->>
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <span>Doanh thu theo tháng</span>
                     </div>
-                </div>
-
-                <div class="col-md-6 mb-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <span>Dịch vụ phổ biến</span>
-                        </div>
-                        <div class="card-body">
-                            <div class="chart-container" id="servicesChart"></div>
-                        </div>
+                    <div class="card-body">
+                        <canvas class="chart-container" id="revenueChart"></canvas>
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <span>Dịch vụ phổ biến</span>
+                    </div>
+                    <div class="card-body">
+                        <canvas class="chart-container" id="servicesChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+<!--            <div class="row">-->
+<!--                <div class="col-md-6 mb-4">-->
+<!--                    <div class="card">-->
+<!--                        <div class="card-header">-->
+<!--                            <span>Doanh thu theo tháng</span>-->
+<!--                        </div>-->
+<!--                        <div class="card-body">-->
+<!--                            <div class="chart-container" id="revenueChart"></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="col-md-6 mb-4">-->
+<!--                    <div class="card">-->
+<!--                        <div class="card-header">-->
+<!--                            <span>Dịch vụ phổ biến</span>-->
+<!--                        </div>-->
+<!--                        <div class="card-body">-->
+<!--                            <div class="chart-container" id="servicesChart"></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
 
         <!-- Orders Section -->
@@ -537,14 +560,24 @@
                 </div>
 
                 <div class="col-lg-4">
+                    <!--sua -->
                     <div class="card mb-4">
                         <div class="card-header">
                             <span>Dịch vụ phổ biến</span>
                         </div>
                         <div class="card-body">
-                            <div class="chart-container" id="popularServicesChart"></div>
+                            <canvas class="chart-container" id="popularServicesChart"></canvas>
                         </div>
                     </div>
+
+<!--                    <div class="card mb-4">-->
+<!--                        <div class="card-header">-->
+<!--                            <span>Dịch vụ phổ biến</span>-->
+<!--                        </div>-->
+<!--                        <div class="card-body">-->
+<!--                            <div class="chart-container" id="popularServicesChart"></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
                     <div class="card">
                         <div class="card-header">
@@ -768,13 +801,15 @@
             </div>
 
             <div class="row">
+
+                <!-- sua -->
                 <div class="col-md-8 mb-4">
                     <div class="card">
                         <div class="card-header">
                             <span>Doanh thu theo thời gian</span>
                         </div>
                         <div class="card-body">
-                            <div class="chart-container" id="revenueTimeChart"></div>
+                            <canvas class="chart-container" id="revenueTimeChart"></canvas>
                         </div>
                     </div>
                 </div>
@@ -784,20 +819,17 @@
                             <span>Phân bổ doanh thu</span>
                         </div>
                         <div class="card-body">
-                            <div class="chart-container" id="revenuePieChart"></div>
+                            <canvas class="chart-container" id="revenuePieChart"></canvas>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="row">
                 <div class="col-md-6 mb-4">
                     <div class="card">
                         <div class="card-header">
                             <span>Số lượng đơn hàng theo trạng thái</span>
                         </div>
                         <div class="card-body">
-                            <div class="chart-container" id="orderStatusChart"></div>
+                            <canvas class="chart-container" id="orderStatusChart"></canvas>
                         </div>
                     </div>
                 </div>
@@ -807,10 +839,54 @@
                             <span>Khách hàng mới/cũ</span>
                         </div>
                         <div class="card-body">
-                            <div class="chart-container" id="customerTypeChart"></div>
+                            <canvas class="chart-container" id="customerTypeChart"></canvas>
                         </div>
                     </div>
                 </div>
+
+<!--                <div class="col-md-8 mb-4">-->
+<!--                    <div class="card">-->
+<!--                        <div class="card-header">-->
+<!--                            <span>Doanh thu theo thời gian</span>-->
+<!--                        </div>-->
+<!--                        <div class="card-body">-->
+<!--                            <div class="chart-container" id="revenueTimeChart"></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-md-4 mb-4">-->
+<!--                    <div class="card">-->
+<!--                        <div class="card-header">-->
+<!--                            <span>Phân bổ doanh thu</span>-->
+<!--                        </div>-->
+<!--                        <div class="card-body">-->
+<!--                            <div class="chart-container" id="revenuePieChart"></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="row">-->
+<!--                <div class="col-md-6 mb-4">-->
+<!--                    <div class="card">-->
+<!--                        <div class="card-header">-->
+<!--                            <span>Số lượng đơn hàng theo trạng thái</span>-->
+<!--                        </div>-->
+<!--                        <div class="card-body">-->
+<!--                            <div class="chart-container" id="orderStatusChart"></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-md-6 mb-4">-->
+<!--                    <div class="card">-->
+<!--                        <div class="card-header">-->
+<!--                            <span>Khách hàng mới/cũ</span>-->
+<!--                        </div>-->
+<!--                        <div class="card-body">-->
+<!--                            <div class="chart-container" id="customerTypeChart"></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </div>
 
@@ -1227,6 +1303,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="index.js"></script>
 </body>
 </html>

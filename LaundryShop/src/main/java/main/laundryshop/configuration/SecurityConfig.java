@@ -22,7 +22,7 @@ import org.springframework.web.filter.CorsFilter;
 @EnableMethodSecurity
 public class SecurityConfig {
     private final String[] PUBLIC_ENDPOINTS = {
-            "/users", "/auth/token", "/auth/introspect", "/auth/logout", "/auth/refresh"
+            "/users", "/auth/token", "/auth/introspect", "/auth/logout", "/auth/refresh", "/customers", "/orders", "'/services"
     };
 
     @Autowired
@@ -30,15 +30,20 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeHttpRequests(request -> request.requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS)
-                .permitAll()
-                .anyRequest()
-                .authenticated());
+        httpSecurity.authorizeHttpRequests(request -> request
+//                .requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS).permitAll()
+//                .requestMatchers(HttpMethod.GET, PUBLIC_ENDPOINTS).permitAll()
+//                .anyRequest().authenticated());
 
-        httpSecurity.oauth2ResourceServer(oauth2 -> oauth2.jwt(jwtConfigurer -> jwtConfigurer
-                        .decoder(customJwtDecoder)
-                        .jwtAuthenticationConverter(jwtAuthenticationConverter()))
-                .authenticationEntryPoint(new JwtAuthenticationEntryPoint()));
+                .requestMatchers(PUBLIC_ENDPOINTS).permitAll() // Cho phép tất cả phương thức
+                .requestMatchers("/static/**").permitAll() // Cho phép truy cập file tĩnh (admin.html, index.js, v.v.)
+                .anyRequest().permitAll()); // Tạm thời cho phép tất cả (có thể thay đổi sau)
+
+//        httpSecurity.oauth2ResourceServer(oauth2 -> oauth2.jwt(jwtConfigurer -> jwtConfigurer
+//                        .decoder(customJwtDecoder)
+//                        .jwtAuthenticationConverter(jwtAuthenticationConverter()))
+//                .authenticationEntryPoint(new JwtAuthenticationEntryPoint()));
+
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
 
         return httpSecurity.build();

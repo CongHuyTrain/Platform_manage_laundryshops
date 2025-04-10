@@ -2,14 +2,37 @@ document.addEventListener('DOMContentLoaded', function () {
     const sidebarItems = document.querySelectorAll('.sidebar-item');
     const sections = document.querySelectorAll('.section');
 
+    //let TOKEN = localStorage.getItem('token') || null;
+    //let TOKEN = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsInNjb3BlIjoiIiwiaXNzIjoiZGV3dGVyaWEuY29tIiwiZXhwIjoxNzQ2ODY4MTc5LCJpYXQiOjE3NDQyNzYxNzl9.84ZqWsIaQ71A6bFxZU1iXjaPf-cO0AOrxrXfX8vxOKdW8tYPnjTL66BjtDEunifYfgzBx_77g-jR21obBv5Jkw';
+
+
+    // Đăng nhập
+    // async function login() {
+    //     const username = prompt('Nhập username:');
+    //     const password = prompt('Nhập password:');
+    //     const data = { username, password };
+    //     const response = await fetchData('/auth/token', 'POST', data);
+    //     TOKEN = response.token;
+    //     localStorage.setItem('token', TOKEN);
+    //     alert('Đăng nhập thành công!');
+    //     loadDashboard();
+    // }
+    // Tải dữ liệu dashboard
+    async function loadDashboard() {
+        await loadOrders();
+        await loadCustomers();
+        await loadServices();
+        createCharts();
+    }
+
     sidebarItems.forEach(item => {
         item.addEventListener('click', function () {
             const sectionId = this.getAttribute('data-section');
-            
+
             // Update active sidebar item
             sidebarItems.forEach(el => el.classList.remove('active'));
             this.classList.add('active');
-            
+
             // Show corresponding section
             sections.forEach(section => {
                 section.classList.remove('active');
@@ -20,9 +43,143 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // Khởi động
+    loadDashboard();
+
     // Create charts
-    createCharts();
+    //createCharts();
 });
+
+// Khai báo URL cục bộ
+const BASE_URL = 'http://localhost:8080'; // URL backend
+
+// Hàm gọi API chung
+async function fetchData(endpoint, method = 'GET', data = null) {
+    try {
+        const config = {
+            method: method,
+            url: `${BASE_URL}${endpoint}`,
+            headers: {
+                //'Authorization': `Bearer ${TOKEN}`,
+                'Content-Type': 'application/json'
+            }
+        };
+        //if (TOKEN) config.headers['Authorization'] = `Bearer ${TOKEN}`;
+        if (data) config.data = data;
+        const response = await axios(config);
+        return response.data;
+    } catch (error) {
+        console.error(`Error fetching ${endpoint}:`, error);
+        alert(`Lỗi: ${error.response?.data?.message || error.message}`);
+        throw error;
+    }
+}
+
+// Tải danh sách đơn hàng
+async function loadOrders() {
+    const orders = await fetchData('/orders');
+    const tbody = document.querySelector('#allOrders tbody');
+    tbody.innerHTML = orders.map(order => `
+            <tr>
+                <td>${order.orderId}</td>
+                <td>${order.customerId}</td>
+                <td>${order.service}</td>
+                <td>${order.receiveDate}</td>
+                <td>${order.deliveryDate}</td>
+                <td>${order.total.toLocaleString()}đ</td>
+                <td><span class="status-badge status-${order.status.toLowerCase()}">${order.status}</span></td>
+                <td>
+                    <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i></button>
+                    <button class="btn btn-sm btn-outline-warning"><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>
+        `).join('');
+}
+
+// Tải danh sách khách hàng
+async function loadCustomers() {
+    const customers = await fetchData('/customers');
+    const tbody = document.querySelector('#customers tbody');
+    tbody.innerHTML = customers.map(customer => `
+            <tr>
+                <td>${customer.customerId}</td>
+                <td>${customer.name}</td>
+                <td>${customer.phone}</td>
+                <td>${customer.email}</td>
+                <td>${customer.address}</td>
+                <td>${customer.orderCount}</td>
+                <td><span class="badge bg-${customer.type === 'VIP' ? 'primary' : customer.type === 'Thân thiết' ? 'info' : 'secondary'}">${customer.type}</span></td>
+                <td>
+                    <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i></button>
+                    <button class="btn btn-sm btn-outline-warning"><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>
+        `).join('');
+}
+
+// Tải danh sách dịch vụ
+async function loadServices() {
+    const services = await fetchData('/services');
+    const container = document.querySelector('#services .card-body');
+    container.innerHTML = services.map(service => `
+            <div class="service-item">
+                <div class="service-icon"><i class="fas ${service.icon} fa-lg"></i></div>
+                <div class="service-info">
+                    <h5>${service.name}</h5>
+                    <p>${service.description}</p>
+                </div>
+                <div class="service-price">${service.price.toLocaleString()}đ/${service.unit}</div>
+                <div class="ms-3">
+                    <button class="btn btn-sm btn-outline-warning"><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+        `).join('');
+}
+
+// Thêm khách hàng
+document.querySelector('#newCustomerModal .btn-custom').addEventListener('click', async () => {
+    try {
+        const customer = {
+            customerId: `#CUS${Math.floor(Math.random() * 1000)}`,
+            name: document.querySelector('#customerName').value,
+            phone: document.querySelector('#customerPhone').value,
+            email: document.querySelector('#customerEmail').value,
+            address: document.querySelector('#customerAddress').value,
+            orderCount: 0,
+            type: document.querySelector('#customerType').value,
+            note: document.querySelector('#customerNote').value
+        };
+        await fetchData('/customers', 'POST', customer);
+        loadCustomers();
+        bootstrap.Modal.getInstance(document.querySelector('#newCustomerModal')).hide();
+    } catch (error) {
+        console.error('Lỗi khi thêm khách hàng:', error);
+    }
+});
+
+// Thêm đơn hàng
+document.querySelector('#newOrderModal .btn-custom').addEventListener('click', async () => {
+    const order = {
+        customerId: document.querySelector('#customerSelect').value,
+        receiveDate: document.querySelector('#orderDate').value,
+        deliveryDate: document.querySelector('#deliveryDate').value,
+        status: document.querySelector('#orderStatus').value,
+        total: parseFloat(document.querySelector('#totalAmount').value.replace('đ', '').replace(/\./g, '')),
+        note: document.querySelector('#orderNote').value
+        // Thêm logic để lấy danh sách dịch vụ từ bảng trong modal nếu cần
+    };
+    await fetchData('/orders', 'POST', order);
+    loadOrders();
+    bootstrap.Modal.getInstance(document.querySelector('#newOrderModal')).hide();
+});
+
+// Khởi động
+//if (!TOKEN) login();
+//else loadDashboard();
+
 
 function createCharts() {
     // Revenue Chart
