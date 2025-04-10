@@ -78,23 +78,42 @@ async function fetchData(endpoint, method = 'GET', data = null) {
 // Tải danh sách đơn hàng
 async function loadOrders() {
     const orders = await fetchData('/orders');
+    //console.log('Orders:', orders); // Kiểm tra dữ liệu trả về
+
+    // Ánh xạ trạng thái
+    const statusMap = {
+        'Đang chờ': 'pending',
+        'Đang xử lý': 'processing',
+        'Hoàn thành': 'completed',
+        'Đã giao': 'delivered',
+        'Đã hủy': 'cancelled',
+        'PENDING': 'pending',
+        'PROCESSING': 'processing',
+        'COMPLETED': 'completed',
+        'DELIVERED': 'delivered',
+        'CANCELLED': 'cancelled'
+    };
+
     const tbody = document.querySelector('#allOrders tbody');
-    tbody.innerHTML = orders.map(order => `
+    tbody.innerHTML = orders.map(order => {
+        const statusClass = statusMap[order.status] || order.status.toLowerCase();
+        return `
             <tr>
-                <td>${order.orderId}</td>
+                <td>${order.orderId }</td>
                 <td>${order.customerId}</td>
-                <td>${order.service}</td>
+                <td>${order.service }</td>
                 <td>${order.receiveDate}</td>
                 <td>${order.deliveryDate}</td>
                 <td>${order.total.toLocaleString()}đ</td>
-                <td><span class="status-badge status-${order.status.toLowerCase()}">${order.status}</span></td>
+                <td><span class="status-badge status-${statusClass}">${order.status}</span></td>
                 <td>
                     <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i></button>
                     <button class="btn btn-sm btn-outline-warning"><i class="fas fa-edit"></i></button>
                     <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
                 </td>
             </tr>
-        `).join('');
+        `;
+    }).join('');
 }
 
 // Tải danh sách khách hàng
@@ -157,6 +176,41 @@ document.querySelector('#newCustomerModal .btn-custom').addEventListener('click'
         bootstrap.Modal.getInstance(document.querySelector('#newCustomerModal')).hide();
     } catch (error) {
         console.error('Lỗi khi thêm khách hàng:', error);
+    }
+});
+
+// Thêm dịch vụ
+document.addEventListener('DOMContentLoaded', function () {
+    const addServiceButton = document.querySelector('#newServiceModal .btn-custom');
+    if (addServiceButton) {
+        addServiceButton.addEventListener('click', async () => {
+            const modalElement = document.querySelector('#newServiceModal');
+            const modalInstance = bootstrap.Modal.getInstance(modalElement);
+            console.log('Modal instance:', modalInstance);
+
+            try {
+                const service = {
+                    name: document.querySelector('#serviceName')?.value || '',
+                    description: document.querySelector('#serviceDescription')?.value || '',
+                    price: parseFloat(document.querySelector('#servicePrice')?.value) || 0,
+                    unit: document.querySelector('#serviceUnit')?.value || '',
+                    icon: document.querySelector('#serviceIcon')?.value || ''
+                };
+                console.log('Service data:', service);
+                await fetchData('/services', 'POST', service);
+                loadServices();
+            } catch (error) {
+                console.error('Lỗi khi thêm dịch vụ:', error);
+            } finally {
+                if (modalInstance) {
+                    modalInstance.hide();
+                } else {
+                    console.error('Không thể khởi tạo modal instance');
+                }
+            }
+        });
+    } else {
+        console.error('Không tìm thấy nút .btn-custom trong #newServiceModal');
     }
 });
 

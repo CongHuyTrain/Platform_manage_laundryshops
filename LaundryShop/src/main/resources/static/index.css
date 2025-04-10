@@ -151,27 +151,33 @@ body {
     border-radius: 20px;
     font-size: 12px;
     font-weight: 600;
-    color: white;
+    color: white; /* Màu mặc định */
 }
 
-.status-pending {
-    background-color: var(--status-pending);
+/* Hỗ trợ tiếng Anh */
+.status-pending, .status-đang-chờ {
+    background-color: var(--status-pending); /* #f39c12 - Vàng cam */
+    color: #000000; /* Đen */
 }
 
-.status-processing {
-    background-color: var(--status-processing);
+.status-processing, .status-đang-xử-lý {
+    background-color: var(--status-processing); /* #3498db - Xanh dương */
+    color: #ffffff; /* Trắng */
 }
 
-.status-completed {
-    background-color: var(--status-completed);
+.status-completed, .status-hoàn-thành {
+    background-color: var(--status-completed); /* #2ecc71 - Xanh lá */
+    color: #000000; /* Đen */
 }
 
-.status-delivered {
-    background-color: var(--status-delivered);
+.status-delivered, .status-đã-giao {
+    background-color: var(--status-delivered); /* #27ae60 - Xanh lá đậm */
+    color: #ffffff; /* Trắng */
 }
 
-.status-cancelled {
-    background-color: var(--status-cancelled);
+.status-cancelled, .status-đã-hủy {
+    background-color: var(--status-cancelled); /* #e74c3c - Đỏ */
+    color: #ffffff; /* Trắng */
 }
 
 .stat-card {
