@@ -6,6 +6,7 @@
     import org.springframework.stereotype.Service;
 
     import java.util.List;
+    import java.util.UUID;
 
     @Service
     public class LaundryServiceService {
@@ -20,7 +21,7 @@
             return laundryServiceRepository.save(service);
         }
 
-        public LaundryService updateService(Long id, LaundryService laundryService) {
+        public LaundryService updateService(UUID id, LaundryService laundryService) {
             LaundryService service = laundryServiceRepository.findById(id)
                     .orElseThrow(() -> new RuntimeException("Service not found"));
             service.setName(laundryService.getName());
@@ -32,7 +33,7 @@
             return laundryServiceRepository.save(service);
         }
 
-        public void deleteService(Long id) {
+        public void deleteService(UUID id) {
             laundryServiceRepository.deleteById(id);
         }
     }

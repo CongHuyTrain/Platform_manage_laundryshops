@@ -1042,51 +1042,43 @@
                             <label class="form-label">Dịch vụ</label>
                             <div class="card">
                                 <div class="card-body p-0">
-                                    <table class="table mb-0">
+                                    <table class="table mb-0" id="serviceTable">
                                         <thead>
-                                            <tr>
-                                                <th>Dịch vụ</th>
-                                                <th>Số lượng</th>
-                                                <th>Đơn giá</th>
-                                                <th>Thành tiền</th>
-                                                <th></th>
-                                            </tr>
+                                        <tr>
+                                            <th>Dịch vụ</th>
+                                            <th>Số lượng</th>
+                                            <th>Đơn giá</th>
+                                            <th></th>
+                                        </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <select class="form-select">
-                                                        <option selected>-- Chọn dịch vụ --</option>
-                                                        <option>Giặt ủi quần áo thường</option>
-                                                        <option>Giặt khô</option>
-                                                        <option>Giặt ủi đồ cao cấp</option>
-                                                        <option>Giặt thảm, rèm cửa</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <input type="number" class="form-control" value="1" min="1">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="form-control" value="50.000đ" readonly>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="form-control" value="50.000đ" readonly>
-                                                </td>
-                                                <td>
-                                                    <button type="button" class="btn btn-outline-danger btn-sm">
-                                                        <i class="fas fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                        <tbody id="serviceTableBody">
+                                        <tr class="service-row">
+                                            <td>
+                                                <select class="form-select service-type" id="serviceType">
+                                                    <option value="">-- Chọn dịch vụ --</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="number" class="form-control service-quantity" value="1" min="1">
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control service-unit-price" value="0đ" readonly>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-outline-danger btn-sm btn-remove-service">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
                                         </tbody>
                                         <tfoot>
-                                            <tr>
-                                                <td colspan="5">
-                                                    <button type="button" class="btn btn-outline-success btn-sm w-100">
-                                                        <i class="fas fa-plus"></i> Thêm dịch vụ
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                        <tr>
+                                            <td colspan="5">
+                                                <button type="button" class="btn btn-outline-success btn-sm w-100 btn-add-service">
+                                                    <i class="fas fa-plus"></i> Thêm dịch vụ
+                                                </button>
+                                            </td>
+                                        </tr>
                                         </tfoot>
                                     </table>
                                 </div>
@@ -1096,11 +1088,11 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="subTotal" class="form-label">Tạm tính</label>
-                                <input type="text" class="form-control" id="subTotal" value="50.000đ" readonly>
+                                <input type="text" class="form-control" id="subTotal" value="0đ" readonly>
                             </div>
                             <div class="col-md-6">
                                 <label for="taxAmount" class="form-label">Thuế (10%)</label>
-                                <input type="text" class="form-control" id="taxAmount" value="5.000đ" readonly>
+                                <input type="text" class="form-control" id="taxAmount" value="0đ" readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -1110,7 +1102,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="totalAmount" class="form-label">Tổng tiền</label>
-                                <input type="text" class="form-control" id="totalAmount" value="55.000đ" readonly>
+                                <input type="text" class="form-control" id="totalAmount" value="0đ" readonly>
                             </div>
                         </div>
                         <div class="mb-3">
@@ -1296,6 +1288,118 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                     <button type="button" class="btn btn-custom">Thêm khuyến mãi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Xem chi tiết đơn hàng -->
+    <div class="modal fade" id="viewOrderModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Chi tiết đơn hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Mã đơn hàng</label>
+                            <input type="text" class="form-control" id="viewOrderId" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Khách hàng</label>
+                            <input type="text" class="form-control" id="editCustomerId" readonly>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Ngày nhận</label>
+                            <input type="date" class="form-control" id="viewReceiveDate" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Ngày giao</label>
+                            <input type="date" class="form-control" id="viewDeliveryDate" readonly>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Dịch vụ</label>
+                            <input type="text" class="form-control" id="viewService" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Trạng thái</label>
+                            <input type="text" class="form-control" id="viewStatus" readonly>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Tổng tiền</label>
+                            <input type="text" class="form-control" id="viewTotal" readonly>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Ghi chú</label>
+                        <textarea class="form-control" id="viewNote" rows="3" readonly></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Xem chi tiết khách hàng -->
+    <div class="modal fade" id="viewCustomerModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Chi tiết khách hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Mã khách hàng</label>
+                            <input type="text" class="form-control" id="viewCustomerId" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Tên khách hàng</label>
+                            <input type="text" class="form-control" id="viewCustomerName" readonly>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Số điện thoại</label>
+                            <input type="text" class="form-control" id="viewCustomerPhone" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Email</label>
+                            <input type="text" class="form-control" id="viewCustomerEmail" readonly>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Địa chỉ</label>
+                        <input type="text" class="form-control" id="viewCustomerAddress" readonly>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Số đơn hàng</label>
+                            <input type="number" class="form-control" id="viewCustomerOrderCount" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Loại khách hàng</label>
+                            <input type="text" class="form-control" id="viewCustomerType" readonly>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Ghi chú</label>
+                        <textarea class="form-control" id="viewCustomerNote" rows="3" readonly></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                 </div>
             </div>
         </div>

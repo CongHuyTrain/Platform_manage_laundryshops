@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class OrderService {
@@ -24,7 +25,7 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
-    public Order updateOrder(Long id, Order order) {
+    public Order updateOrder(UUID id, Order order) {
         Order existingOrder = orderRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
         existingOrder.setCustomerId(order.getCustomerId());
@@ -37,7 +38,12 @@ public class OrderService {
         return orderRepository.save(existingOrder);
     }
 
-    public void deleteOrder(Long id) {
+    public void deleteOrder(UUID id) {
         orderRepository.deleteById(id);
+    }
+
+    public Order getOrderById(UUID id) {
+        return  orderRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
     }
 }

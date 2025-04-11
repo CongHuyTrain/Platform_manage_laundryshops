@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/services")
@@ -25,12 +26,12 @@ public class ServiceController {
     }
 
     @PutMapping("/{id}")
-    public LaundryService updateService(@PathVariable Long id, @RequestBody LaundryService service) {
+    public LaundryService updateService(@PathVariable UUID id, @RequestBody LaundryService service) {
         return serviceService.updateService(id, service);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteService(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteService(@PathVariable UUID id) {
         serviceService.deleteService(id);
         return ResponseEntity.noContent().build();
     }
