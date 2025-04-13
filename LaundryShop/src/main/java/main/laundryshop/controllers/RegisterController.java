@@ -1,39 +1,38 @@
 package main.laundryshop.controllers;
 
+import main.laundryshop.models.Customer;
+import main.laundryshop.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1")
-
 public class RegisterController {
 
-    @Autowired
-    CustomerService customerService;
+    private final CustomerService customerService;
 
-                                                                                                                 
+    @Autowired
+    public RegisterController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
+
     @PostMapping("/register")
     public ResponseEntity<String> registerCustomer(@RequestBody Customer customer) {
-        ResponseEntity<String> response = null;
-
         try {
-            Customer savedCustomer = customerService.createCustomer (customer);
-            if (savedCustomer.getId() > 0) {
-                response = ResponseEntity.status(HttpStatus.CREATED)
-                        .body("Customer is created successfully for customer=" + customer.getUsername());
+            Customer savedCustomer = customerService.createCustomer(customer);
+
+            if (savedCustomer != null && savedCustomer.getId() != null && savedCustomer.getId() > 0) {
+                return ResponseEntity.status(HttpStatus.CREATED)
+                        .body("Customer created successfully for username = " + savedCustomer.getUsername());
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("Failed to create customer. Invalid data.");
             }
-        } catch (Exception exception) {
-            response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("An exception occurred from server with exception=" + exception);
-
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An error occurred on the server. Please try again later.");
         }
-
-        return response;
-
     }
 }
