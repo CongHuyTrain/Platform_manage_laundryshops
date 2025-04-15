@@ -16,7 +16,6 @@ import main.laundryshop.dto.response.AuthenticationResponse;
 import main.laundryshop.dto.response.IntrospectResponse;
 import main.laundryshop.models.User;
 import main.laundryshop.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;

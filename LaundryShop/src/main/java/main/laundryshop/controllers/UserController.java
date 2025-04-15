@@ -2,7 +2,6 @@ package main.laundryshop.controllers;
 
 import jakarta.validation.Valid;
 
-import lombok.RequiredArgsConstructor;
 import main.laundryshop.dto.request.ApiResponse;
 import main.laundryshop.dto.request.UserCreationRequest;
 import main.laundryshop.dto.request.UserUpdateRequest;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @RestController
 @RequestMapping("/users")
 public class UserController {
