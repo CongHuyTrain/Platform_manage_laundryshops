@@ -1,12 +1,11 @@
 package main.laundryshop.controllers;
 
 import main.laundryshop.models.Customer;
-import main.laundryshop.services.CustomerService;
+import main.laundryshop.service.CustomerService; // Sửa service thành services
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 @RestController
 @RequestMapping("/v1")
 public class RegisterController {
@@ -23,9 +22,9 @@ public class RegisterController {
         try {
             Customer savedCustomer = customerService.createCustomer(customer);
 
-            if (savedCustomer != null && savedCustomer.getId() != null && savedCustomer.getId() > 0) {
+            if (savedCustomer != null && savedCustomer.getId() != null) {
                 return ResponseEntity.status(HttpStatus.CREATED)
-                        .body("Customer created successfully for username = " + savedCustomer.getUsername());
+                        .body("Customer created successfully with id = " + savedCustomer.getId());
             } else {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body("Failed to create customer. Invalid data.");
