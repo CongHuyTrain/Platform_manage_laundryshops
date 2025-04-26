@@ -3,6 +3,7 @@ package main.laundryshop.controllers;
 import jakarta.validation.Valid;
 
 import main.laundryshop.dto.request.ApiResponse;
+import main.laundryshop.dto.request.LoginRequest;
 import main.laundryshop.dto.request.UserCreationRequest;
 import main.laundryshop.dto.request.UserUpdateRequest;
 import main.laundryshop.dto.response.UserResponse;
@@ -56,5 +57,16 @@ public class UserController {
         return ApiResponse.<UserResponse>builder()
                 .result(userService.updateUser(userId, request))
                 .build();
+    }
+    // Đăng ký tài khoản
+    @PostMapping("/register")
+    public UserResponse register(@RequestBody UserCreationRequest request) {
+        return userService.createUser(request);
+    }
+
+    // Đăng nhập
+    @PostMapping("/login")
+    public UserResponse login(@RequestBody LoginRequest request) {
+        return userService.login(request.getUsername(), request.getPassword());
     }
 }

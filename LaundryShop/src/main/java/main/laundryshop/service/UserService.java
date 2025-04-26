@@ -86,4 +86,14 @@ public class UserService {
         return userMapper.toUserResponse(
                 userRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED)));
     }
+    public UserResponse login(String username, String rawPassword) {
+        User user = userRepository.findByName(username)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+
+        if (!passwordEncoder.matches(rawPassword, user.getPassword())) {
+            throw new AppException(ErrorCode.UNAUTHORIZED);
+        }
+
+        return userMapper.toUserResponse(user);
+    }
 }
